@@ -2,7 +2,7 @@
   <form @submit.prevent="addTodo">
     <fieldset role="group">
       <input type="text" placeholder="Veuillez écrire vos tâches ici..." v-model="newTodo">
-      <button>Ajouter</button>
+      <button :disabled="newTodo.trim() === ''">Ajouter</button>
     </fieldset>
   </form>
   <div v-if="todos.length === 0">Vous n'avez aucune tâche à effectuer.</div>
@@ -22,6 +22,9 @@ const todos = ref([]);
 const newTodo = ref('');
 
 const addTodo = () => {
+  if (newTodo.value.trim() === '') {
+    return;
+  }
   todos.value.push({
     title: newTodo.value.trim(),
     completed: false,
