@@ -8,7 +8,8 @@
   <div v-if="todos.length === 0">Vous n'avez aucune tâche à effectuer.</div>
   <div v-else>
     <ul>
-      <li v-for="todo in todos" :key="todo.date">
+      <li v-for="todo in todos" :key="todo.date" :class="{completed: todo.completed}">
+        <input type="checkbox" v-model="todo.completed">
         {{ todo.title }}
       </li>
     </ul>
@@ -18,7 +19,18 @@
 <script setup>
 import { ref } from 'vue';
 
-const todos = ref([]);
+const todos = ref([
+  {
+    title: 'Tâche de test',
+    completed: true,
+    date: 1
+  },
+  {
+    title: 'Tâche de test 2',
+    completed: false,
+    date: 2
+  }
+]);
 const newTodo = ref('');
 
 const addTodo = () => {
@@ -28,10 +40,15 @@ const addTodo = () => {
   todos.value.push({
     title: newTodo.value.trim(),
     completed: false,
-    date: 1
+    date: Date.now(),
   });
   newTodo.value = '';
 }
 </script>
 
-<style></style>
+<style>
+.completed {
+  opacity: .5;
+  text-decoration: line-through;
+}
+</style>
