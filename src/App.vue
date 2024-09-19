@@ -13,25 +13,19 @@
         {{ todo.title }}
       </li>
     </ul>
+    <label>
+      <input type="checkbox" v-model="hideCompleted">
+      Masquer les éléments
+    </label>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 
-const todos = ref([
-  {
-    title: 'Tâche de test',
-    completed: true,
-    date: 1
-  },
-  {
-    title: 'Tâche de test 2',
-    completed: false,
-    date: 2
-  }
-]);
+const todos = ref([]);
 const newTodo = ref('');
+const hideCompleted = ref(false);
 
 const addTodo = () => {
   if (newTodo.value.trim() === '') {
@@ -46,7 +40,11 @@ const addTodo = () => {
 }
 
 const sortedTodos = () => {
-  return todos.value.toSorted((a, b) => a.completed > b.completed);
+    const sortedTodos = todos.value.toSorted((a, b) => a.completed > b.completed);
+    if (hideCompleted.value) {
+      return sortedTodos.filter(t => t.completed === false);
+    }
+    return sortedTodos;
 }
 </script>
 
