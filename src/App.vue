@@ -8,7 +8,7 @@
   <div v-if="todos.length === 0">Vous n'avez aucune tâche à effectuer.</div>
   <div v-else>
     <ul>
-      <li v-for="todo in sortedTodos()" :key="todo.date" :class="{ completed: todo.completed }">
+      <li v-for="todo in sortedTodos()" :key="todo.date" :class="{ completed: todo.completed }" @click="deleteTodo(todo)">
         <input type="checkbox" v-model="todo.completed">
         {{ todo.title }}
       </li>
@@ -37,6 +37,10 @@ const addTodo = () => {
     date: Date.now(),
   });
   newTodo.value = '';
+}
+
+const deleteTodo = (todo) => {
+  todos.value = todos.value.filter(t => t.date !== todo.date);
 }
 
 const sortedTodos = () => {
