@@ -1,8 +1,8 @@
 <template>
 <div v-if="todos.length === 0">Vous n'avez aucune tâche à effectuer.</div>
-<form @submit.prevet="addTodo">
+<form @submit.prevent="addTodo">
   <fieldset role="group">
-    <input type="text" placeholder="Veuillez écrire vos tâches ici...">
+    <input type="text" placeholder="Veuillez écrire vos tâches ici..." v-model="newTodo">
     <button>Ajouter</button>
   </fieldset>
 </form>
@@ -12,6 +12,16 @@
 import { ref } from 'vue';
 
 const todos = ref([]);
+const newTodo = ref('');
+
+const addTodo = () => {
+  todos.value.push({
+    title: newTodo.value.trim(),
+    completed: false,
+    date: 1
+  });
+  newTodo.value = '';
+}
 </script>
 
 <style></style>
