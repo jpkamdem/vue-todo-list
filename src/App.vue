@@ -22,11 +22,14 @@
       <input type="checkbox" v-model="hideCompleted" />
       Masquer les éléments
     </label>
+    <p v-if="remainingTodos > 0">
+      {{ remainingTodos }} tâche{{ remainingTodos > 1 ? 's' : '' }} à faire
+    </p>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, reactive } from "vue";
 
 const todos = ref([]);
 const newTodo = ref("");
@@ -55,6 +58,10 @@ const sortedTodos = computed(() => { // optimisation grâce au computed, ne reca
   }
   return sortedTodos;
 });
+
+const remainingTodos = computed(() => {
+  return todos.value.filter(t => t.completed === false).length;
+})
 </script>
 
 <style>
