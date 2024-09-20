@@ -8,7 +8,7 @@
   <div v-if="todos.length === 0">Vous n'avez aucune tâche à effectuer.</div>
   <div v-else>
     <ul>
-      <li v-for="todo in sortedTodos()" :key="todo.date" :class="{ completed: todo.completed }" >
+      <li v-for="todo in sortedTodos" :key="todo.date" :class="{ completed: todo.completed }" >
         <input type="checkbox" v-model="todo.completed">
         {{ todo.title }}
       </li>
@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 const todos = ref([]);
 const newTodo = ref('');
@@ -43,13 +43,14 @@ const deleteTodo = (todo) => {
   todos.value = todos.value.filter(t => t.date !== todo.date);
 }
 
-const sortedTodos = () => {
+const sortedTodos = computed(() => {
+  console.log('demo');
     const sortedTodos = todos.value.toSorted((a, b) => a.completed > b.completed);
     if (hideCompleted.value) {
       return sortedTodos.filter(t => t.completed === false);
     }
     return sortedTodos;
-}
+})
 </script>
 
 <style>
