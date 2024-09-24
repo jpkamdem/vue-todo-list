@@ -18,7 +18,9 @@
           :class="{ completed: todo.completed }" 
         >
         <!-- On injecte Checkbox, avec l'attribut todo.title qu'on parcourt dans le li, et qu'on accepte dans Checkbox.vue via defineProps({title:}) -->
-        <Checkbox :title="todo.title"/>
+        <Checkbox :title="todo.title"
+        v-model="todo.completed"
+        />
       </li>
     </ul>
     <label>
