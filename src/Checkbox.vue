@@ -10,15 +10,4 @@ const model = defineModel();
 const props = defineProps({
   title: String,
 });
-const emit = defineEmits([
-  'check',
-  'uncheck'
-]);
-
-const onChange = (e) => {
-  if (e.currentTarget.checked) {
-    return emit('check', e.currentTarget);
-  }
-  return emit('uncheck', e.currentTarget);
-}
 </script>
