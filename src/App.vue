@@ -12,8 +12,12 @@
   <div v-else>
     <ul>
       <!-- Boucle simple, classe dynamique vérifiant la valeur de la propriété completed -->
-      <li v-for="todo in sortedTodos" :key="todo.date" :class="{ completed: todo.completed }" @click="deleteTodo(todo)">
-        <!-- On injecte Checkbox, avec l'attribut todo.title qu'on parcourt dans le li, et qu'on accepte dans Checkbox.vue via defineProps({title: String}) -->
+      <li 
+          v-for="todo in sortedTodos"
+          :key="todo.date"
+          :class="{ completed: todo.completed }" 
+        >
+        <!-- On injecte Checkbox, avec l'attribut todo.title qu'on parcourt dans le li, et qu'on accepte dans Checkbox.vue via defineProps({title:}) -->
         <Checkbox :title="todo.title"/>
       </li>
     </ul>
