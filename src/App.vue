@@ -13,11 +13,8 @@
     <ul>
       <!-- Boucle simple, classe dynamique vérifiant la valeur de la propriété completed -->
       <li v-for="todo in sortedTodos" :key="todo.date" :class="{ completed: todo.completed }" @click="deleteTodo(todo)">
-        <label>
-          <!-- click.stop permet d'empêcher la fonction deleteTodo de fonctionner sur la checkbox -->
-          <input type="checkbox" v-model="todo.completed" @click.stop />
-          {{ todo.title }}
-        </label>
+        <!-- On injecte Checkbox, avec l'attribut todo.title qu'on parcourt dans le li, et qu'on accepte dans Checkbox.vue via defineProps({title: String}) -->
+        <Checkbox :title="todo.title"/>
       </li>
     </ul>
     <label>
@@ -32,6 +29,7 @@
 
 <script setup>
 import { ref, computed } from "vue";
+import Checkbox from "./Checkbox.vue";
 
 const todos = ref([
   {
