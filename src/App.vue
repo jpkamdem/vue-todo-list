@@ -13,9 +13,11 @@
     <ul>
       <!-- Boucle simple, classe dynamique vérifiant la valeur de la propriété completed -->
       <li v-for="todo in sortedTodos" :key="todo.date" :class="{ completed: todo.completed }" @click="deleteTodo(todo)">
-        <!-- click.stop permet d'empêcher la fonction deleteTodo de fonctionner sur la checkbox -->
-        <input type="checkbox" v-model="todo.completed" @click.stop />
-        {{ todo.title }}
+        <label>
+          <!-- click.stop permet d'empêcher la fonction deleteTodo de fonctionner sur la checkbox -->
+          <input type="checkbox" v-model="todo.completed" @click.stop />
+          {{ todo.title }}
+        </label>
       </li>
     </ul>
     <label>
@@ -29,9 +31,20 @@
 </template>
 
 <script setup>
-import { ref, computed, reactive } from "vue";
+import { ref, computed } from "vue";
 
-const todos = ref([]);
+const todos = ref([
+  {
+    title: 'Tâche à faire 1',
+    completed: true,
+    date: 1
+  },
+  {
+    title: 'Tâche à faire 2',
+    completed: false,
+    date: 2
+  }
+]);
 const newTodo = ref("");
 const hideCompleted = ref(false);
 
